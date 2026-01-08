@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
       - name: Run Code Periscope
         id: periscope
-        uses: code-periscope/code-periscope-action@v1.2
+        uses: code-periscope/code-periscope-action@v1.3
         with:
           repository: .
           max-commits: ${{ inputs.max_commits }}
