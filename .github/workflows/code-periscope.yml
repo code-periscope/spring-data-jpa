@@ -1,0 +1,40 @@
+name: Run Code Periscope
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_commits:
+        description: "Limit number of commits to scan (higher = slower)"
+        required: false
+        default: "5000"
+      risky_items:
+        description: "Top N risky items to show in the report"
+        required: false
+        default: "5"
+
+jobs:
+  example:
+    name: Run code-periscope on repo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Code Periscope
+        id: periscope
+        uses: code-periscope/code-periscope-action@v1
+        with:
+          repository: .
+          max-commits: ${{ inputs.max_commits }}
+          risky-items: ${{ inputs.risky_items }}
+          output-directory: output
+      - name: Analyze repository
+        shell: bash
+        run: |
+          {
+              echo "## Code Periscope Report"
+              echo
+              cat ${step.periscope.outputs.report-path}
+          } >> $GITHUB_STEP_SUMMARY
