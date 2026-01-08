@@ -36,5 +36,5 @@ jobs:
           {
               echo "## Code Periscope Report"
               echo
-              cat ${step.periscope.outputs.report-path}
+              cat ${{ step.periscope.outputs.report-path }}
           } >> $GITHUB_STEP_SUMMARY
