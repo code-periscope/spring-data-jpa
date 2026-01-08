@@ -24,13 +24,13 @@ jobs:
           fetch-depth: 0
       - name: Run Code Periscope
         id: periscope
-        uses: code-periscope/code-periscope-action@v1.1
+        uses: code-periscope/code-periscope-action@v1.2
         with:
           repository: .
           max-commits: ${{ inputs.max_commits }}
           risky-items: ${{ inputs.risky_items }}
           output-directory: output
-      - name: Analyze repository
+      - name: Publish report
         shell: bash
         run: |
           {
